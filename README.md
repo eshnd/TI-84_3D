@@ -1,4 +1,4 @@
-# 3D-TI-84
+# 3D TI-84
 3D wireframe rendering engine for the TI-84
 # Instructions
 - Input verts and tris for your 3D model or use default cube
