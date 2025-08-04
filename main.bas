@@ -28,6 +28,7 @@ sin(T) -> l1(9)
 0 -> I
 While I<dim(lTRIS)
 {0,0,0,0,0,0,0,0,0,0} -> lTRI
+
 0 -> J
 While J<3
 ((lTRIS(I+J+1))*3) -> T
@@ -49,3 +50,70 @@ l1(17) -> Z
 ((X*lPROJ(1))+(Y*lPROJ(5))+(Z*lPROJ(9))+lPROJ(13)) -> l1(18)
 ((X*lPROJ(2))+(Y*lPROJ(6))+(Z*lPROJ(10))+lPROJ(14)) -> l1(19)
 ((X*lPROJ(4))+(Y*lPROJ(8))+(Z*lPROJ(12))+lPROJ(16)) -> l1(20)
+
+If l1(20)!=0
+Then
+(l1(18)/l1(20)) -> l1(18)
+(l1(19)/l1(20)) -> l1(19)
+End
+
+((l1(18)+1)*0.5*l1(1)) -> l1(18)
+((l1(19)+1)*0.5*l1(2)) -> l1(19)
+
+l1(18) -> lTRI((J*3)+1)
+l1(19) -> lTRI((J*3)+2)
+0 -> lTRI((J*3)+3)
+(J+1) -> J
+End
+
+0 -> J
+While J<3
+int(lTRI((remainder(J,3)*3)+1)) -> l1(21)
+int(lTRI((remainder(J,3)*3)+2)) -> l1(22)
+int(lTRI((remainder((J+1),3)*3)+1)) -> V
+int(lTRI((remainder((J+1),3)*3)+2)) -> W
+
+V -> l1(14)
+W -> l1(15)
+
+abs(l1(14)-l1(21)) -> l1(23)
+-abs(l1(15)-l1(22)) -> l1(24)
+
+If l1(21)<l1(14)
+Then
+1 -> l1(25)
+Else
+-1 -> l1(25)
+End
+
+If l1(22)<l1(15)
+Then
+1 -> l1(26)
+Else
+-1 -> l1(26)
+End
+
+(l1(23)+l1(24)) -> ls(27)
+While (l1(21)!=l1(14)) or (l1(22)!=l1(15))
+If (0<=l1(21)) and (l1(21)<l1(1)) and (0<=l1(22)) and (l1(22)<l1(2))
+Then
+Pxl-On(l1(21),l1(22))
+End
+
+(2*l1(27)) -> E
+If E>=l1(24)
+Then
+(l1(27)+l1(24)) -> l1(27)
+(l1(21)+l1(25)) -> l1(21)
+End
+If E<=l1(23)
+Then
+(l1(27)+l1(23)) -> l1(27)
+(l1(22)+l1(26)) -> l1(22)
+End
+End
+(J+1) -> J
+End
+(I+1) -> I
+End
+End
